@@ -1,0 +1,25 @@
+<%- include("partials/header") %>
+
+<div class="row g-4">
+  <div class="col-lg-3"><%- include("partials/admin-sidebar") %></div>
+  <div class="col-lg-9">
+    <h2 class="mb-1">Admin Dashboard</h2>
+    <p class="text-muted"><%= admin.parking_location %></p>
+    <div class="row g-3">
+      <div class="col-md-3"><div class="stat-card"><span>Total Slots</span><strong><%= stats.total %></strong></div></div>
+      <div class="col-md-3"><div class="stat-card"><span>Available</span><strong><%= stats.available %></strong></div></div>
+      <div class="col-md-3"><div class="stat-card"><span>Occupied</span><strong><%= stats.occupied %></strong></div></div>
+      <div class="col-md-3"><div class="stat-card"><span>Bookings</span><strong><%= stats.bookings %></strong></div></div>
+    </div>
+    <div class="content-panel mt-4">
+      <h5>Admin Actions</h5>
+      <a href="/parking/entry" class="btn btn-primary me-2 mb-2">Verify Entry</a>
+      <a href="/parking/exit" class="btn btn-warning me-2 mb-2">Verify Exit</a>
+      <a href="/admin/bookings" class="btn btn-outline-primary me-2 mb-2">View Bookings</a>
+      <a href="/admin/bills" class="btn btn-outline-primary me-2 mb-2">Checkout Bills</a>
+      <a href="/admin/transactions" class="btn btn-outline-primary mb-2">View Transactions</a>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+<div class="row g-4">
+  <div class="col-lg-3"><%- include("partials/admin-sidebar") %></div>
+  <div class="col-lg-9">
+    <div class="content-panel">
+      <h2 class="mb-3">Verify Booking Ticket</h2>
+      <form action="/parking/entry" method="POST">
+        <div class="mb-3">
+          <label class="form-label">Ticket Number</label>
+          <input type="text" name="ticket_number" class="form-control" placeholder="TKT-..." required>
+        </div>
+        <button class="btn btn-primary">Approve Entry</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>
