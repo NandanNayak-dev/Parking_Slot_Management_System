@@ -4,7 +4,10 @@
   <div class="col-lg-3"><%- include("partials/customer-sidebar") %></div>
   <div class="col-lg-9">
     <div class="content-panel">
-      <h2 class="mb-3">Book Parking Slot</h2>
+      <div class="panel-heading">
+        <span class="eyebrow">Reservation</span>
+        <h2>Book Parking Slot</h2>
+      </div>
 
       <form action="/parking/book" method="GET" class="row g-3 mb-4">
         <div class="col-md-9">
@@ -21,7 +24,7 @@
         </div>
       </form>
 
-      <form action="/parking/book" method="POST" class="row g-3">
+      <form action="/parking/book" method="POST" class="row g-3 form-block">
         <div class="col-md-6">
           <label class="form-label">Vehicle</label>
           <select name="vehicle_reg_no" class="form-select" required>

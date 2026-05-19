@@ -9,7 +9,7 @@
         Please download the checkout PDF bill before completing payment.
         <a href="/booking/exit-ticket/pdf?id=<%= payment.booking_id %>" class="alert-link">Download PDF Bill</a>
       </div>
-      <div class="row g-3 mb-4">
+      <div class="row g-3 mb-4 detail-grid">
         <div class="col-md-6"><strong>Location:</strong><br><%= payment.area_name %></div>
         <div class="col-md-6"><strong>Vehicle:</strong><br><%= payment.vehicle_reg_no %></div>
         <div class="col-md-6"><strong>Entry Time:</strong><br><%= new Date(payment.in_time).toLocaleString() %></div>
