@@ -12,6 +12,38 @@ A smart parking slot management web application built with Node.js, Express, MyS
 - Payment and receipt management
 - Admin booking, billing, and transaction management
 
+## Screenshots
+
+### Home Page
+
+![Smart Parking home page](assets/screenshots/home-page.png)
+
+### Customer Screens
+
+#### Add Vehicle
+
+![Add vehicle form](assets/screenshots/add-vehicle.png)
+
+#### Parking Locations
+
+![Parking locations page](assets/screenshots/parking-locations.png)
+
+#### Book Parking Slot
+
+![Book parking slot page](assets/screenshots/book-slot.png)
+
+#### Booking History
+
+![Booking history page](assets/screenshots/booking-history.png)
+
+#### Checkout Bill
+
+![Checkout bill page](assets/screenshots/checkout-bill.png)
+
+### Admin Dashboard
+
+![Admin dashboard](assets/screenshots/admin-dashboard.png)
+
 ## Tech Stack
 
 - Node.js
