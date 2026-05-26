@@ -51,7 +51,7 @@ exports.signup = async (req, res, next) => {
     }
 
     if (err.code === "ER_BAD_DB_ERROR") {
-      req.session.error = "Database 'marks' not found. Please run database/schema.sql in MySQL first.";
+      req.session.error = "Database 'parking' not found. Please run database/schema.sql in MySQL first.";
       return res.redirect("/signup");
     }
 
