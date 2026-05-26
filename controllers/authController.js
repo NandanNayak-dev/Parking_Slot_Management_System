@@ -14,6 +14,11 @@ exports.signup = async (req, res, next) => {
       return res.redirect("/signup");
     }
 
+    if (!/^\d{10}$/.test(mobile_no)) {
+      req.session.error = "Mobile number must be exactly 10 digits.";
+      return res.redirect("/signup");
+    }
+
     const [existing] = await db.execute("SELECT customer_id FROM customers WHERE email = ?", [email]);
     if (existing.length > 0) {
       req.session.error = "Email already registered.";
