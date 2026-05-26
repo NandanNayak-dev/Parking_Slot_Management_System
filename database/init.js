@@ -166,6 +166,15 @@ async function createTables() {
         ON DELETE CASCADE
     )
   `);
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS sessions (
+      session_id VARCHAR(128) PRIMARY KEY,
+      data TEXT NOT NULL,
+      expires_at DATETIME NOT NULL,
+      INDEX idx_sessions_expires_at (expires_at)
+    )
+  `);
 }
 
 async function seedAdmins() {
@@ -201,6 +210,7 @@ async function ensureDatabaseReady() {
   await createTables();
   await seedAdmins();
   await seedParkingSlots();
+  await db.execute("DELETE FROM sessions WHERE expires_at <= NOW()");
   await db.execute("SELECT 1");
 }
 

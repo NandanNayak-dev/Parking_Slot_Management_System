@@ -13,6 +13,7 @@ const bookingRoutes = require("./routes/bookingRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const { ensureDatabaseReady } = require("./database/init");
+const MySQLSessionStore = require("./database/sessionStore");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "smart_parking_secret_key",
+    store: new MySQLSessionStore(),
     resave: false,
     saveUninitialized: false,
     cookie: {
