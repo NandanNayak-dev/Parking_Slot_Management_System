@@ -89,7 +89,13 @@ async function startServer() {
       console.log(`Smart Parking app running on port ${PORT}`);
     });
   } catch (err) {
-    console.error("Startup failed:", err.message);
+    console.error("Startup failed:", err.message || err.code || err);
+    if (err.code) {
+      console.error("Database error code:", err.code);
+    }
+    if (err.sqlMessage) {
+      console.error("Database message:", err.sqlMessage);
+    }
     console.error("Check your DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME, and DB_SSL deployment variables.");
     process.exit(1);
   }
