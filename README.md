@@ -76,9 +76,12 @@ npm install
 
 ```env
 DB_HOST=localhost
+DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_password
-DB_NAME=parking_slot_management
+DB_NAME=parking
+DB_SSL=false
+AUTO_SETUP_DB=true
 SESSION_SECRET=your_secret_key
 PORT=3000
 ```
@@ -108,6 +111,44 @@ npm run dev
 - `npm run setup-db` - creates and sets up the database
 - `npm run check-db` - checks the database connection
 - `npm run reset-admins` - resets admin data
+
+## Deployment Notes
+
+Do not use `DB_HOST=localhost` on a deployed website unless MySQL is installed on the same deployed server. Most hosting platforms run your Node.js app separately from the database, so `localhost` will fail with a MySQL connection error.
+
+For deployment:
+
+1. Create a hosted MySQL database using your hosting provider or a service such as Railway, Aiven, PlanetScale, Clever Cloud, or another MySQL-compatible provider.
+2. Add these environment variables in your deployment dashboard:
+
+```env
+NODE_ENV=production
+DB_HOST=your-hosted-mysql-hostname
+DB_PORT=3306
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_NAME=parking
+DB_SSL=false
+AUTO_SETUP_DB=true
+SESSION_SECRET=use_a_long_random_secret
+```
+
+If your database provider requires SSL, set `DB_SSL=true`. If it provides a self-signed certificate and the connection fails because of certificate validation, set `DB_SSL=allow-invalid`.
+
+When `AUTO_SETUP_DB=true`, the app creates missing tables and default parking/admin data automatically on startup without deleting customer, booking, vehicle, transaction, or receipt records.
+
+Recommended deploy commands:
+
+```bash
+npm install
+npm start
+```
+
+Before redeploying, verify the production database credentials locally by temporarily placing them in `.env` and running:
+
+```bash
+npm run check-db
+```
 
 ## Project Structure
 

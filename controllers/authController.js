@@ -56,7 +56,10 @@ exports.signup = async (req, res, next) => {
     }
 
     if (err.code === "ECONNREFUSED") {
-      req.session.error = "MySQL is not running. Please start MySQL and try again.";
+      req.session.error =
+        process.env.NODE_ENV === "production"
+          ? "Database connection failed. Set DB_HOST to your hosted MySQL hostname, not localhost."
+          : "MySQL is not running. Please start MySQL and try again.";
       return res.redirect("/signup");
     }
 

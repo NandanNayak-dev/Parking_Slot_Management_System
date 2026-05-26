@@ -12,9 +12,11 @@ const parkingRoutes = require("./routes/parkingRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const { ensureDatabaseReady } = require("./database/init");
 
 const app = express();
 
+app.set("trust proxy", 1);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -28,7 +30,9 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60
+      maxAge: 1000 * 60 * 60,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production"
     }
   })
 );
@@ -71,6 +75,22 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Smart Parking app running at http://localhost:${PORT}`);
-});
+
+async function startServer() {
+  try {
+    if (process.env.AUTO_SETUP_DB !== "false") {
+      await ensureDatabaseReady();
+      console.log("Database is ready");
+    }
+
+    app.listen(PORT, () => {
+      console.log(`Smart Parking app running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Startup failed:", err.message);
+    console.error("Check your DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME, and DB_SSL deployment variables.");
+    process.exit(1);
+  }
+}
+
+startServer();
